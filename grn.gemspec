@@ -2,11 +2,15 @@
 require File.expand_path('../lib/grn/version', __FILE__)
 
 Gem::Specification.new do |gem|
-  gem.authors       = ["Marcelo"]
+  gem.authors       = ["Marcelo Theodoro"]
   gem.email         = ["marcelo.theodorojr@gmail.com"]
-  gem.description   = "Implementa os conceitos da linguagem de padrões GRN"
-  gem.summary       = "Implementa classes de apoio para a linguagem de padrões GRN e cria geradores para cada padrão"
-  gem.homepage      = ""
+  gem.version       = Grn::VERSION
+  gem.description   = "Implementa os conceitos da linguagem de padrões GRN."
+  gem.summary       = "Implementa classes de apoio para a linguagem de padrões GRN e cria geradores para cada padrão."
+  gem.homepage      = "https://github.com/marcelotheodoro/grn"
+  
+  gem.add_dependency 'rails'
+  gem.add_dependency 'mdd'
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
