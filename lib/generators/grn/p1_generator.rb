@@ -1,7 +1,6 @@
 # -*- encoding : utf-8 -*-
 
 require 'rails/generators'
-require 'rails/generators/migration'
 
 require 'mdd/generators/model'
 require 'mdd/generators/model_attribute'
@@ -9,10 +8,6 @@ require 'mdd/generators/model_attribute'
 module Grn
   module Generators
     class P1Generator < Rails::Generators::Base
-      
-      include Rails::Generators::Migration
-      
-      source_root File.expand_path("../templates", __FILE__)
       
       attr_accessor :resource_type_name, :resource_type_attributes, :resource_name, :resource_attributes, :resource, :resource_type
 
@@ -50,6 +45,7 @@ module Grn
 
       end
       
+      
       def mdd_associations
         
         # resouce type
@@ -62,13 +58,19 @@ module Grn
         
       end 
       
-      # Implement the required interface for Rails::Generators::Migration.
-      def self.next_migration_number(dirname)
-        if ActiveRecord::Base.timestamped_migrations
-          Time.now.utc.strftime("%Y%m%d%H%M%S").to_s
-        else
-          "%.3d" % (current_migration_number(dirname) + 1)
+      
+      def insert_into_classes
+        
+        # resource type
+        inject_into_class "app/models/#{@resource_type.space}/#{@resource_type.singular_name}.rb", @resource_type.klass.classify.constantize do
+          'include Grn::ResourceType'
         end
+        
+        # resource
+        inject_into_class "app/models/#{@resource.space}/#{@resource.singular_name}.rb", @resource.klass.classify.constantize do
+          'include Grn::Resource'
+        end
+        
       end
 
     end # class
