@@ -3,7 +3,8 @@
 require 'rails/generators'
 require 'rails/generators/migration'
 
-require 'mdd/generators'
+require 'mdd/generators/model'
+require 'mdd/generators/model_attribute'
 
 module Grn
   module Generators
@@ -26,32 +27,38 @@ module Grn
         super
         
         # resource type
-        @resource_type_name = options.type_name || ask("Choose the resource type name.\nExample: Category, ProductCategory, etc.\nResource type name:")
+        @resource_type_name = options.type_name || ask("\nChoose the resource type name.\nExample: Category, ProductCategory, etc.\nResource type name:")
         @resource_type = Mdd::Generators::Model.new( @resource_type_name )
         print_usage unless @resource_type.valid?
         
         #resource type attributes
-        @resource_type_attributes = options.type_attributes || ask("Choose the resource type attributes.\nSyntax: similar to MDD gem. Description is already included.\nResource type attributes:")
+        @resource_type_attributes = options.type_attributes || ask("\n=============================\nChoose the resource type attributes.\nSyntax: similar to MDD gem. Description is already included.\nResource type attributes:")
         @resource_type_attributes.split(' ').each do |attribute|
           @resource_type.add_attribute Mdd::Generators::ModelAttribute.new( attribute )
         end
 
         # resource 
-        @resource_name = options.resource_name || ask("Choose the resource name.\nExample: Product, Movie, Equipment, etc.\nResource name:")
+        @resource_name = options.resource_name || ask("\n=============================\nChoose the resource name.\nExample: Product, Movie, Equipment, etc.\nResource name:")
         @resource = Mdd::Generators::Model.new( @resource_name )
         print_usage unless @resource.valid?
         
         # resource attributes
-        @resource_attributes = options.resource_attributes || ask("Choose the resource attributes.\nSyntax: similar to MDD gem. Description is already included.\nResource attributes:")
+        @resource_attributes = options.resource_attributes || ask("\n=============================\nChoose the resource attributes.\nSyntax: similar to MDD gem. Description is already included.\nResource attributes:")
         @resource_attributes.split(' ').each do |attribute|
           @resource.add_attribute Mdd::Generators::ModelAttribute.new( attribute )
         end
 
       end
       
-      def log
+      def mdd_associations
         
-        template 'test.rb', 'p1_generator.txt'
+        # resouce type
+        # generate the scaffold with the attributes
+        generate "mdd:scaffold #{@resource_type.raw} description:string #{@resource_type.attributes.map{ |attr| attr.raw }.join(' ')}"
+        
+        # resouce
+        # generate the scaffold with the attributes and belongs_to resource type
+        generate "mdd:scaffold #{@resource.raw} description:string #{@resource.attributes.map{ |attr| attr.raw }.join(' ')} #{@resource_type.singular_name}:#{@resource_type.raw}:description:belongs_to"
         
       end 
       
