@@ -4,7 +4,7 @@ require 'rails/generators'
 require 'rails/generators/migration'
 
 module Grn
-  module P1
+  module Generators
     class P1Generator < Rails::Generators::Base
       
       include Rails::Generators::Migration
@@ -13,8 +13,8 @@ module Grn
       
       attr_accessor :resource_type_name, :resource_type_attributes, :resource_name, :resource_attributes
 
-      class_option :resource_type_name, :desc => 'The name of the resource type', :type => :string
-      class_option :resource_type_attributes, :desc => 'The name of the resource type', :type => :string
+      class_option :type_name, :desc => 'The name of the resource type', :type => :string
+      class_option :type_attributes, :desc => 'The name of the resource type', :type => :string
 
       class_option :resource_name, :desc => 'The name of the resource type', :type => :string
       class_option :resource_attributes, :desc => 'The name of the resource type', :type => :string
@@ -23,8 +23,8 @@ module Grn
 
         super
         
-        @resource_type_name = options.resource_type_name || ask("Name of the resource type?\nExample: Category, ProductCategory...\n")
-        @resource_type_attributes = options.resource_type_attributes || ask("What's the name of the resource type?")
+        @resource_type_name = options.type_name || ask("Name of the resource type?\nExample: Category, ProductCategory...\n")
+        @resource_type_attributes = options.type_attributes || ask("What's the name of the resource type?")
 
       end
       
@@ -38,5 +38,5 @@ module Grn
       end
 
     end # class
-  end # p1
+  end # generators
 end # grn
