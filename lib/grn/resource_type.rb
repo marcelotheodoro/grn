@@ -1,6 +1,6 @@
 module Grn
   
-  class ResourceType
+  module ResourceType
     
     # override
     # identify the resource according to GRN first pattern

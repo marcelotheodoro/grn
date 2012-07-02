@@ -1,6 +1,6 @@
 module Grn
   
-  class Resource < ActiveRecord::Base
+  module Resource
     
     # override
     # identify the resource type according to GRN first pattern
