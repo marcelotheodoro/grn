@@ -63,12 +63,12 @@ module Grn
         
         # resource type
         inject_into_class "app/models/#{@resource_type.space}/#{@resource_type.singular_name}.rb", @resource_type.klass.classify.constantize do
-          'include Grn::ResourceType'
+          "include Grn::ResourceType"
         end
         
         # resource
         inject_into_class "app/models/#{@resource.space}/#{@resource.singular_name}.rb", @resource.klass.classify.constantize do
-          'include Grn::Resource'
+          "include Grn::Resource"
         end
         
       end
