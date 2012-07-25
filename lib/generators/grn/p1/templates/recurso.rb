@@ -4,7 +4,6 @@ MDWA::DSL.entities.register "<%= @recurso_nome %>" do |e|
   
   e.resource  = true      # should it be stored like a resource?
   e.ajax      = true      # scaffold with ajax?
-  e.user      = false     # is this entity a loggable user?
   e.scaffold_name = 'a/<%= @recurso_nome.underscore %>' # mdwa sandbox specific code?
   e.model_name = 'a/<%= @recurso_nome.underscore %>' # use specific model name? or different namespace?
 
