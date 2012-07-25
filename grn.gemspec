@@ -9,7 +9,6 @@ Gem::Specification.new do |gem|
   gem.summary       = "Implementa classes de apoio para a linguagem de padrões GRN e cria geradores para cada padrão."
   gem.homepage      = "https://github.com/marcelotheodoro/grn"
   
-  gem.add_dependency 'rails'
   gem.add_dependency 'mdd'
 
   gem.files         = `git ls-files`.split($\)
