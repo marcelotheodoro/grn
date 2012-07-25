@@ -1,8 +1,6 @@
 # -*- encoding : utf-8 -*-
 require 'rails/generators'
 
-require 'mdd/dsl'
-
 module Grn
   module Generators
     class InstallGenerator < Rails::Generators::Base
