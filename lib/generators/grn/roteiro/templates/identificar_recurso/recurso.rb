@@ -32,6 +32,13 @@ MDWA::DSL.entities.register "<%= @recurso_nome %>" do |e|
     a.type = 'many_to_one'
     a.destination = '<%= @tipo_recurso_nome %>'
   end
+  
+  <%- if recurso_instanciavel? -%>
+  e.association do |a|
+    a.type = 'one_to_many'
+    a.destination = '<%= @nome_quantificacao_recurso %>'
+  end
+  <%- end -%>
 
   ##
   ## Entity specifications. 
