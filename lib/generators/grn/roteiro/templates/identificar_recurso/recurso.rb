@@ -20,6 +20,11 @@ MDWA::DSL.entities.register "<%= @recurso_nome %>" do |e|
     attr.type = 'decimal'
   end
   
+  e.attribute do |attr|
+    attr.name = 'situacao'
+    attr.type = 'string'
+  end
+  
   ##
   ## Define entity associations
   ##
